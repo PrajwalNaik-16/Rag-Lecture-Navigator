@@ -95,6 +95,9 @@ LINK_REWIND_SECONDS = int(os.getenv("YTRAG_LINK_REWIND", 5))
 #
 # Set YTRAG_EMBED_MODEL=BAAI/bge-m3 and reindex if you want the last 1/12.
 EMBED_MODEL = os.getenv("YTRAG_EMBED_MODEL", "all-MiniLM-L6-v2")
+PRELOAD_EMBEDDER = os.getenv("YTRAG_PRELOAD_EMBEDDER", "true").strip().lower() not in {
+    "0", "false", "no", "off"
+}
 EMBED_BATCH = int(os.getenv("YTRAG_EMBED_BATCH", 16))
 # Some models want an instruction prefixed to the *query only*. bge-m3 does
 # not; bge-*-en-v1.5 does. If you switch models, check the model card.

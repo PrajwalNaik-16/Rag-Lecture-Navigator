@@ -33,9 +33,12 @@ async def lifespan(app: FastAPI):
     """
     from ytrag.embed import get_embedder
 
-    print("Loading embedding model (first run downloads it)...", flush=True)
-    embedder = get_embedder()
-    print(f"Ready: {embedder.name} ({embedder.dim}-dim)", flush=True)
+    if config.PRELOAD_EMBEDDER:
+        print("Loading embedding model (first run downloads it)...", flush=True)
+        embedder = get_embedder()
+        print(f"Ready: {embedder.name} ({embedder.dim}-dim)", flush=True)
+    else:
+        print("Embedding model will load on the first request.", flush=True)
     yield
 
 

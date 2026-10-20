@@ -11,6 +11,8 @@ services:
         value: my_course_v2
       - key: YTRAG_EMBED_MODEL
         value: all-MiniLM-L6-v2
+      - key: YTRAG_PRELOAD_EMBEDDER
+        value: "false"
       - key: QDRANT_URL
         sync: false
       - key: QDRANT_API_KEY
