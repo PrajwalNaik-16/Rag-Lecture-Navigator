@@ -278,6 +278,7 @@ Everything is env-driven; defaults live in [ytrag/config.py](ytrag/config.py).
 | `YTRAG_CHUNK_SECONDS` | `75` | ~one explained idea |
 | `YTRAG_CHUNK_OVERLAP` | `15` | |
 | `YTRAG_EMBED_MODEL` | `all-MiniLM-L6-v2` | `BAAI/bge-m3` for stronger multilingual retrieval |
+| `YTRAG_EMBED_BACKEND` | `sentence-transformers` | `fastembed` uses quantized ONNX MiniLM with a smaller runtime footprint for constrained hosts |
 | `YTRAG_COLLECTION` | `dsa_lectures` | the embedding dim gets appended |
 | `YTRAG_TOP_K` | `6` | |
 | `YTRAG_MAX_DISTANCE` | `0.6` | the grounding cutoff — see below, and re-tune |

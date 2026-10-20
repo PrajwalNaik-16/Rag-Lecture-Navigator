@@ -8,6 +8,7 @@ import contextlib
 import io
 import re
 import sys
+import threading
 from typing import Protocol
 
 from ytrag.config import EMBED_BATCH, EMBED_MODEL, EMBED_QUERY_PREFIX
@@ -84,12 +85,64 @@ class SentenceTransformerEmbedder:
         return vector.tolist()
 
 
+class FastEmbedEmbedder:
+    """CPU friendly ONNX Runtime backend for small hosted instances.
+
+    FastEmbed's quantized MiniLM export avoids importing PyTorch (which has a
+    large resident memory footprint) in the web process. Keep ``name`` equal
+    to the configured SentenceTransformers model name so existing index
+    metadata and collection dimensions remain recognizable.
+    """
+
+    _MODEL_ALIASES = {
+        "all-minilm-l6-v2": "sentence-transformers/all-MiniLM-L6-v2",
+        "sentence-transformers/all-minilm-l6-v2": "sentence-transformers/all-MiniLM-L6-v2",
+    }
+
+    def __init__(self, model_name: str = EMBED_MODEL):
+        from fastembed import TextEmbedding
+
+        self.name = model_name
+        fastembed_name = self._MODEL_ALIASES.get(model_name.casefold(), model_name)
+        with _quiet_load():
+            self.model = TextEmbedding(model_name=fastembed_name, threads=1)
+        model_info = next(
+            (item for item in TextEmbedding.list_supported_models() if item["model"] == fastembed_name),
+            None,
+        )
+        if model_info is None:
+            raise ValueError(f"FastEmbed does not report model metadata for {fastembed_name!r}.")
+        self.dim = int(model_info["dim"])
+
+    def embed_documents(self, texts: list[str]) -> list[list[float]]:
+        if not texts:
+            return []
+        return [vector.tolist() for vector in self.model.embed(texts, batch_size=1)]
+
+    def embed_query(self, text: str) -> list[float]:
+        vector = next(self.model.query_embed(EMBED_QUERY_PREFIX + text))
+        return vector.tolist()
+
+
 _EMBEDDER: Embedder | None = None
+_EMBEDDER_LOCK = threading.Lock()
 
 
 def get_embedder() -> Embedder:
-    """Load the embedder once per process — the model is 2.2GB."""
+    """Load the configured embedder once per process."""
     global _EMBEDDER
     if _EMBEDDER is None:
-        _EMBEDDER = SentenceTransformerEmbedder()
+        with _EMBEDDER_LOCK:
+            if _EMBEDDER is None:
+                import os
+
+                backend = os.getenv("YTRAG_EMBED_BACKEND", "sentence-transformers").strip().lower()
+                if backend == "fastembed":
+                    _EMBEDDER = FastEmbedEmbedder()
+                elif backend == "sentence-transformers":
+                    _EMBEDDER = SentenceTransformerEmbedder()
+                else:
+                    raise ValueError(
+                        "YTRAG_EMBED_BACKEND must be 'sentence-transformers' or 'fastembed'."
+                    )
     return _EMBEDDER

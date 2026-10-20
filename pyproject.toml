@@ -8,6 +8,7 @@ dependencies = [
     "yt-dlp>=2026.1.26",
     "faster-whisper>=1.2.0",
     "sentence-transformers>=6.0.0",
+    "fastembed>=0.7.0",
     "qdrant-client>=1.19.0",
     "groq>=1.6.0",
     "python-dotenv>=1.2.3",

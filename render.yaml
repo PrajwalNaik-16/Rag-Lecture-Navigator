@@ -3,14 +3,18 @@ services:
     name: lecture-navigator
     runtime: python
     plan: free
-    buildCommand: uv sync --locked
-    startCommand: uv run --locked uvicorn api.main:app --host 0.0.0.0 --port $PORT
+    # Resolve the FastEmbed dependency on Render until uv.lock is regenerated
+    # locally; the checked-in lock currently predates FastEmbed.
+    buildCommand: uv sync
+    startCommand: uv run --no-sync uvicorn api.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
     envVars:
       - key: YTRAG_COLLECTION
         value: my_course_v2
       - key: YTRAG_EMBED_MODEL
         value: all-MiniLM-L6-v2
+      - key: YTRAG_EMBED_BACKEND
+        value: fastembed
       - key: YTRAG_PRELOAD_EMBEDDER
         value: "false"
       - key: QDRANT_URL
