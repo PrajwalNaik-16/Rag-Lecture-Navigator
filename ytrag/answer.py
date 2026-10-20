@@ -214,7 +214,11 @@ def search_only(question: str, top_k: int = TOP_K, video_id: str | None = None) 
     if not question:
         return {"results": [], "confident": False, "query": question}
 
-    hits = search(question, top_k=top_k, video_id=video_id)
+    # Search is the transparent retrieval path: show the nearest passages even
+    # when the encoder reports a weak match, and let `confident` flag that to
+    # the UI. The stricter MAX_DISTANCE cutoff remains in `answer()` so an
+    # LLM never receives unrelated excerpts as grounded evidence.
+    hits = search(question, top_k=top_k, video_id=video_id, max_distance=2.0)
     return {
         "query": question,
         "confident": _is_confident(question, hits),
