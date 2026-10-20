@@ -27,6 +27,7 @@ from ytrag.config import (
     MAX_DISTANCE,
     QDRANT_API_KEY,
     QDRANT_PATH,
+    QDRANT_TIMEOUT_SECONDS,
     QDRANT_URL,
     TITLE_BOOST,
     TOP_K,
@@ -69,7 +70,11 @@ def get_client() -> QdrantClient:
     global _CLIENT
     if _CLIENT is None:
         if QDRANT_URL:
-            _CLIENT = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY or None)
+            _CLIENT = QdrantClient(
+                url=QDRANT_URL,
+                api_key=QDRANT_API_KEY or None,
+                timeout=QDRANT_TIMEOUT_SECONDS,
+            )
         else:
             QDRANT_PATH.mkdir(parents=True, exist_ok=True)
             try:
@@ -396,6 +401,9 @@ def import_vectors(path: Path, batch_size: int = UPSERT_BATCH) -> dict:
             )
             for v, p in zip(vectors[start : start + batch_size], chunk_payloads)
         ]
-        client.upsert(collection_name=name, points=points, wait=True)
+        with_retry(
+            lambda: client.upsert(collection_name=name, points=points, wait=True),
+            label=f"load vector batch {start // batch_size + 1} ({len(points)} points)",
+        )
 
     return {"count": len(vectors), "model": model}

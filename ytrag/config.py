@@ -126,6 +126,7 @@ COOKIES_FILE = os.getenv("YTRAG_COOKIES_FILE", "")
 QDRANT_URL = os.getenv("QDRANT_URL", "")
 QDRANT_PATH = Path(os.getenv("YTRAG_QDRANT_PATH", ROOT / "qdrant"))
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY", "")
+QDRANT_TIMEOUT_SECONDS = int(os.getenv("YTRAG_QDRANT_TIMEOUT_SECONDS", 60))
 # The collection name carries the embedding dim, so switching embedding
 # models can never hit a dimension-mismatch error against a live collection,
 # and a local index and a deploy index can coexist in the same cluster.
