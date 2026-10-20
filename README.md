@@ -414,24 +414,4 @@ The limiter is in-process, so move it to shared storage before running multiple 
 
 ---
 
-## Portfolio checklist
 
-- [x] Sample transcript corpus, vector export, resumable CLI ingestion, and web search UI
-- [x] Positive and out-of-course examples in the retrieval evaluation set
-- [x] Render blueprint and hosted-Qdrant deployment instructions
-- [x] Core unit tests and a GitHub Actions CI workflow
-- [ ] Capture passing CI and evaluation results for the demo version
-- [ ] Deploy the app and add public links after checking source-data rights
-
-## Resume wording
-
-Use only measurements you have run and can explain. For example:
-
-> Built a timestamp-aware RAG application for YouTube lectures using FastAPI, faster-whisper,
-> sentence-transformers, and Qdrant; indexed **[N] lessons / [H] hours** and measured
-> **[X]% top-5 video hit rate** and **[Y]% timestamp-window hit rate** on **[Q] questions**,
-> with citations linking directly to lecture moments.
-
-The sample contains 126 transcript files. Indexed lesson count, hours, and evaluation scores
-depend on the vector collection actually used, so take those figures from app/evaluator output
-rather than assuming the bundled transcript count is indexed.
