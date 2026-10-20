@@ -372,46 +372,5 @@ saying "cover nahi hua". Three guards in [ytrag/answer.py](ytrag/answer.py):
 (`uuid5` of `"{video_id}:{start_sec}"`), resume on partial failure. You *will* re-run this
 many times.
 
----
-
-## Deploying to Render
-
-The repository includes a `render.yaml` blueprint for the query web service. Push this
-folder as the GitHub repository root, then create a Render Blueprint from that repository.
-The blueprint uses the `my_course_v2` Qdrant collection and `all-MiniLM-L6-v2` embedding
-model. Keep those values the same in your local setup. Add `QDRANT_URL` and `QDRANT_API_KEY`
-to Render as secrets. Add `GROQ_API_KEY` or `GEMINI_API_KEY` only if you want generated
-answers; timestamp search works without an LLM key. Never commit `.env`, transcript files,
-course vector exports, or API keys.
-
-Render's free filesystem is ephemeral, so the deployed app must use hosted Qdrant rather
-than the local Qdrant folder. The blueprint runs search and Q&A only; ingest your videos
-locally with a GPU, then export and upload the vectors:
-
-```powershell
-$env:YTRAG_COLLECTION = "my_course_v2"
-uv --cache-dir .uv-cache run --locked python -m ytrag.cli export-vectors --out course-vectors.npz
-$env:QDRANT_URL = "<YOUR_QDRANT_URL>"
-$env:QDRANT_API_KEY = "<YOUR_QDRANT_API_KEY>"
-uv --cache-dir .uv-cache run --locked python -m ytrag.cli load --path course-vectors.npz
-Remove-Item Env:QDRANT_URL
-Remove-Item Env:QDRANT_API_KEY
-Remove-Item Env:YTRAG_COLLECTION
-```
-
-The export contains transcript text and embeddings. Keep it out of GitHub unless you have
-permission to redistribute the source material; the repository's `.gitignore` excludes
-local transcript and vector data by default.
-
-Use the same `YTRAG_COLLECTION` and `YTRAG_EMBED_MODEL` locally and on Render. The free
-Render web plan has 512 MB RAM and may be too small for the embedding model; if startup runs
-out of memory, choose a larger plan. Free services also spin down when idle and their
-filesystem changes do not persist. See [Render's free plan limits](https://render.com/docs/free).
-
-`/ask` and `/search` are rate-limited per IP and question length is capped. `/health` checks
-process liveness; `/ready` checks that the configured Qdrant collection has searchable chunks.
-The limiter is in-process, so move it to shared storage before running multiple web instances.
-
----
 
 
