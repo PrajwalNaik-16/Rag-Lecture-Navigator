@@ -1,0 +1,202 @@
+[
+  {
+    "q": "memoization aur tabulation me kya difference hai",
+    "expect_video_id": "M0XjVs41H2s",
+    "expect_around_sec": 1448,
+    "tolerance_sec": 120
+  },
+  {
+    "q": "overlapping subproblem kaise pehchane",
+    "expect_video_id": "b-qtjXsGfqo",
+    "expect_around_sec": 0,
+    "tolerance_sec": 120
+  },
+  {
+    "q": "0/1 knapsack ka recursion kaise likhe",
+    "expect_video_id": "LWDYXNN4SHU",
+    "expect_around_sec": 77,
+    "tolerance_sec": 120
+  },
+  {
+    "q": "longest increasing subsequence kaise solve kare",
+    "expect_video_id": "CdGBURVBMn4",
+    "expect_around_sec": 460,
+    "tolerance_sec": 120
+  },
+  {
+    "q": "two pointer technique kab use karte hain",
+    "expect_video_id": "Fu7LD_mIo00",
+    "expect_around_sec": 1683,
+    "tolerance_sec": 120
+  },
+  {
+    "q": "sliding window ka pattern kaise pehchane",
+    "expect_video_id": "DL8LSXUsfWE",
+    "expect_around_sec": 507,
+    "tolerance_sec": 120
+  },
+  {
+    "q": "kadane's algorithm ka intuition kya hai",
+    "expect_video_id": "N8vJ8RyQEes",
+    "expect_around_sec": 961,
+    "tolerance_sec": 120
+  },
+  {
+    "q": "prefix sum ka use kahan hota hai",
+    "expect_video_id": "XLtRoHIDGs0",
+    "expect_around_sec": 1278,
+    "tolerance_sec": 120
+  },
+  {
+    "q": "merge intervals kaise solve karte hain",
+    "expect_video_id": "aH5aeejuJU8",
+    "expect_around_sec": 915,
+    "tolerance_sec": 120
+  },
+  {
+    "q": "linked list me cycle ka start kaise nikale",
+    "expect_video_id": "p8efFVGuqyI",
+    "expect_around_sec": 680,
+    "tolerance_sec": 120
+  },
+  {
+    "q": "slow fast pointer kaise kaam karta hai",
+    "expect_video_id": "IxxlDYwMrZ8",
+    "expect_around_sec": 1030,
+    "tolerance_sec": 120
+  },
+  {
+    "q": "linked list ko k group me reverse kaise kare",
+    "expect_video_id": "BdpT6_jotcM",
+    "expect_around_sec": 0,
+    "tolerance_sec": 120
+  },
+  {
+    "q": "stack me next greater element kaise nikale",
+    "expect_video_id": "gFqOIPfAEjw",
+    "expect_around_sec": 1700,
+    "tolerance_sec": 120
+  },
+  {
+    "q": "hashmap kab use karna chahiye",
+    "expect_video_id": "5Net0Dd7NAA",
+    "expect_around_sec": 1026,
+    "tolerance_sec": 120
+  },
+  {
+    "q": "adjacency list aur adjacency matrix me kya difference hai",
+    "expect_video_id": "WR-hWofGb_U",
+    "expect_around_sec": 1452,
+    "tolerance_sec": 120
+  },
+  {
+    "q": "bfs aur dfs me kya difference hai",
+    "expect_video_id": "O04KAy7cLBs",
+    "expect_around_sec": 2725,
+    "tolerance_sec": 120
+  },
+  {
+    "q": "topological sort kaise karte hain",
+    "expect_video_id": "OSYgRvaWFSI",
+    "expect_around_sec": 1932,
+    "tolerance_sec": 120
+  },
+  {
+    "q": "dijkstra algorithm kaise kaam karta hai",
+    "expect_video_id": "93copdtW4ZQ",
+    "expect_around_sec": 186,
+    "tolerance_sec": 120
+  },
+  {
+    "q": "bellman ford kab use karte hain",
+    "expect_video_id": "A3sZWwalzz4",
+    "expect_around_sec": 1701,
+    "tolerance_sec": 120
+  },
+  {
+    "q": "number of islands kaise solve kare",
+    "expect_video_id": "2HZ12B2ZPAQ",
+    "expect_around_sec": 1471,
+    "tolerance_sec": 120
+  },
+  {
+    "q": "heap se top k frequent elements kaise nikale",
+    "expect_video_id": "5Net0Dd7NAA",
+    "expect_around_sec": 164,
+    "tolerance_sec": 120
+  },
+  {
+    "q": "binary search me aggressive cows problem kaise solve kare",
+    "expect_video_id": "TF53eWL47ws",
+    "expect_around_sec": 1822,
+    "tolerance_sec": 120
+  },
+  {
+    "q": "binary search on answer kya hota hai",
+    "expect_video_id": "0Kxg0LPGwFo",
+    "expect_around_sec": 0,
+    "tolerance_sec": 120
+  },
+  {
+    "q": "LCA in binary tree kaise nikalte hain",
+    "expect_video_id": "QopDohCvJVA",
+    "expect_around_sec": 80,
+    "tolerance_sec": 120
+  },
+  {
+    "q": "binary tree ka diameter kaise nikale",
+    "expect_video_id": "_V7J7exlyzk",
+    "expect_around_sec": 82,
+    "tolerance_sec": 120
+  },
+  {
+    "q": "level order traversal kaise karte hain",
+    "expect_video_id": "-g6h0Ok1Buk",
+    "expect_around_sec": 0,
+    "tolerance_sec": 120
+  },
+  {
+    "q": "recursion ka template kya hai",
+    "expect_video_id": "Qh_U6NYf99o",
+    "expect_around_sec": 0,
+    "tolerance_sec": 120
+  },
+  {
+    "q": "backtracking aur recursion me kya farak hai",
+    "expect_video_id": "yEwnsPI_tUY",
+    "expect_around_sec": 948,
+    "tolerance_sec": 120
+  },
+  {
+    "q": "bit manipulation me XOR ke tricks",
+    "expect_video_id": "T56nhL8Y1po",
+    "expect_around_sec": 3656,
+    "tolerance_sec": 120
+  },
+  {
+    "q": "greedy algorithm kab use karte hain",
+    "expect_video_id": "OaHw9ZZHknw",
+    "expect_around_sec": 511,
+    "tolerance_sec": 120
+  },
+  {
+    "q": "React hooks kaise kaam karte hain",
+    "expect_refusal": true
+  },
+  {
+    "q": "kubernetes me pod aur deployment ka difference",
+    "expect_refusal": true
+  },
+  {
+    "q": "how do I file my income tax return in India",
+    "expect_refusal": true
+  },
+  {
+    "q": "explain the attention mechanism in transformers",
+    "expect_refusal": true
+  },
+  {
+    "q": "django me models kaise banate hain",
+    "expect_refusal": true
+  }
+]

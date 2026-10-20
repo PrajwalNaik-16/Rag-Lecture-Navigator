@@ -1,0 +1,12 @@
+.env
+.venv/
+.uv-cache/
+.ytrag*/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+eval-results/
+course-vectors*.npz
+video_urls.txt
+transcripts/
+index/*.npz
