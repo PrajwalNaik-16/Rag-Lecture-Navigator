@@ -11,7 +11,7 @@ import sys
 import threading
 from typing import Protocol
 
-from ytrag.config import EMBED_BATCH, EMBED_MODEL, EMBED_QUERY_PREFIX
+from ytrag.config import EMBED_BACKEND, EMBED_BATCH, EMBED_MODEL, EMBED_QUERY_PREFIX
 
 # Noise the model loader prints from a compiled extension, which no env var
 # turns off. Filtered rather than suppressed wholesale: anything that is not
@@ -134,15 +134,13 @@ def get_embedder() -> Embedder:
     if _EMBEDDER is None:
         with _EMBEDDER_LOCK:
             if _EMBEDDER is None:
-                import os
-
-                backend = os.getenv("YTRAG_EMBED_BACKEND", "sentence-transformers").strip().lower()
-                if backend == "fastembed":
+                if EMBED_BACKEND == "fastembed":
                     _EMBEDDER = FastEmbedEmbedder()
-                elif backend == "sentence-transformers":
+                elif EMBED_BACKEND == "sentence-transformers":
                     _EMBEDDER = SentenceTransformerEmbedder()
                 else:
                     raise ValueError(
-                        "YTRAG_EMBED_BACKEND must be 'sentence-transformers' or 'fastembed'."
+                        "YTRAG_EMBED_BACKEND must be 'sentence-transformers' or 'fastembed'; "
+                        f"got {EMBED_BACKEND!r}."
                     )
     return _EMBEDDER

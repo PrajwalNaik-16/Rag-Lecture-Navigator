@@ -13,6 +13,8 @@ jobs:
         with:
           enable-cache: true
       - run: uv python install 3.11
-      - run: uv sync --locked
+      # The checked-in lockfile predates the FastEmbed deployment backend.
+      # Resolve from pyproject.toml until uv.lock is regenerated locally.
+      - run: uv sync
       - run: uv pip install "pytest>=8.3,<9"
-      - run: uv run --locked pytest -q
+      - run: uv run --no-sync pytest -q

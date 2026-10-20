@@ -95,6 +95,7 @@ LINK_REWIND_SECONDS = int(os.getenv("YTRAG_LINK_REWIND", 5))
 #
 # Set YTRAG_EMBED_MODEL=BAAI/bge-m3 and reindex if you want the last 1/12.
 EMBED_MODEL = os.getenv("YTRAG_EMBED_MODEL", "all-MiniLM-L6-v2")
+EMBED_BACKEND = os.getenv("YTRAG_EMBED_BACKEND", "sentence-transformers").strip().lower()
 PRELOAD_EMBEDDER = os.getenv("YTRAG_PRELOAD_EMBEDDER", "true").strip().lower() not in {
     "0", "false", "no", "off"
 }
